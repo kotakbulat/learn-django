@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %} <!-- Load static tag if needed inside block -->
+
+{% block title %}Projects - My Portfolio{% endblock %}
+
+{% block content %}
+<h1>My Projects</h1>
+<hr>
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    {% for project in projects %}
+    <div class="col">
+        <div class="card h-100">
+            {% if project.image %}
+            <img src="{{ project.image.url }}" class="card-img-top project-img" alt="{{ project.title }}">
+            {% else %}
+            <img src="{% static 'images/placeholder.png' %}" class="card-img-top project-img" alt="Placeholder"> <!-- Optional: Add a placeholder image -->
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ project.title }}</h5>
+                <p class="card-text">{{ project.description|truncatewords:20 }}</p> <!-- Template Filter -->
+                <p class="card-text"><small class="text-muted">Technology: {{ project.technology }}</small></p>
+            </div>
+            <div class="card-footer">
+                {% if project.link %}
+                <a href="{{ project.link }}" class="btn btn-primary btn-sm" target="_blank">View Project</a>
+                {% endif %}
+                 <!-- Example: Add a detail view later if needed -->
+                 <!-- <a href="#" class="btn btn-secondary btn-sm">Details</a> -->
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col">
+        <p>No projects added yet. Add some in the <a href="{% url 'admin:index' %}">admin panel</a>!</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

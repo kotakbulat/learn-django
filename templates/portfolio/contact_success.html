@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}Message Sent - My Portfolio{% endblock %}
+
+{% block content %}
+<h1>Thank You!</h1>
+<hr>
+<p>Your message has been sent successfully. I'll get back to you soon.</p>
+<a href="{% url 'project_list' %}" class="btn btn-primary">Back to Projects</a>
+{% endblock %}
